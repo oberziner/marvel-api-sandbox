@@ -1,5 +1,8 @@
 const path = require('path');
 const express = require('express');
+const forward = require('./server/proxy.js')
+
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -13,6 +16,10 @@ app.get('/', (req, res) => {
 
 app.get('/__/hello', (req, res) => {
   res.send({ express: 'Mostly harmless' });
+});
+
+app.get('/__/apitest', (req, res) => {
+  forward(res);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
