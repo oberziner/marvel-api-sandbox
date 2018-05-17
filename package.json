@@ -1,0 +1,23 @@
+{
+  "name": "marvel-api-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4"
+  },
+  "proxy": "http://localhost:5000/",
+  "scripts": {
+    "start": "concurrently --kill-others \"npm run start:server\" \"npm run start:frontend\"",
+    "start:frontend": "react-scripts start",
+    "start:server": "nodemon index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
