@@ -1,14 +1,45 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#root {
+  flex: 1 0 auto;
+}
+
 .App {
   text-align: center;
 }
 
+.photo-desc-container > * {
+  vertical-align: middle;
+}
+
+.photo-desc-container p {
+  display: inline-block;
+  width: 300px;
+  padding: 10px;
+}
+
+.photo-desc-container img {
+  padding: 10px;
+}
+
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+  background-color: #8b0000;
+  height: 50px;
+  padding: 10px;
   color: white;
 }
 
 .App-title {
   font-size: 1.5em;
+}
+
+footer {
+  flex-shrink: 0;
+  font-weight: bold;
+  font-size: .75em;
+  text-align: right;
 }

@@ -4,12 +4,17 @@ import './App.css';
 class App extends Component {
 
   state = {
-    character: ''
+    character: null
   };
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ character: res.data.results[0] }))
+      .then((res) => {
+        let character = res.data.results[0];
+        const { thumbnail } = character;
+        character.image = `${thumbnail.path}/portrait_incredible.${thumbnail.extension}`;
+        this.setState({ character });
+      })
       .catch(err => console.log(err));
   }
 
@@ -23,15 +28,26 @@ class App extends Component {
   };
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome</h1>
-          <h1 className="App-title">Don't Panic</h1>
-        </header>
-        <p className="App-intro">{this.state.character.name} </p>
-      </div>
-    );
+    if (this.state.character) {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">{this.state.character.name}</h1>
+          </header>
+          <div className="photo-desc-container">
+            <img src={this.state.character.image}/>
+            <p> 
+              {this.state.character.description} 
+              <a href={this.state.character.urls[0].url}> Marvel link </a>
+            </p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="App"> Loading </div>
+      );
+    }
   }
 }
 
