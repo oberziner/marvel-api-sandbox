@@ -4,17 +4,17 @@ import './App.css';
 class App extends Component {
 
   state = {
-    response: ''
+    character: ''
   };
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ response: res.express }))
+      .then(res => this.setState({ character: res.data.results[0] }))
       .catch(err => console.log(err));
   }
 
   callApi = async () => {
-    const response = await fetch('/__/hello');
+    const response = await fetch('/__/characters/1009610');
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
@@ -29,7 +29,7 @@ class App extends Component {
           <h1 className="App-title">Welcome</h1>
           <h1 className="App-title">Don't Panic</h1>
         </header>
-        <p className="App-intro">{this.state.response} </p>
+        <p className="App-intro">{this.state.character.name} </p>
       </div>
     );
   }
